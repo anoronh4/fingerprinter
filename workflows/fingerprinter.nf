@@ -3,12 +3,12 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { FASTQC                 } from '../modules/nf-core/fastqc/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_fingerprinter_pipeline'
+include { FINGERPRINT_GBCMS      } from '../subworkflows/msk/fingerprint_gbcms/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -24,14 +24,34 @@ workflow FINGERPRINTER {
 
     ch_versions = channel.empty()
     ch_multiqc_files = channel.empty()
-    //
-    // MODULE: Run FastQC
-    //
-    FASTQC (
-        ch_samplesheet
+
+    ch_is_bam = ch_samplesheet.filter{ meta, bam_or_fp, bai ->
+        meta.is_bam
+    }
+    ch_bam = ch_is_bam.map{ meta, bam_or_fp, bai ->
+        [meta, bam_or_fp]
+    }
+    ch_bai = ch_is_bam.map{ meta, bam_or_fp, bai ->
+        [meta, bai]
+    }
+
+    ch_fp_tsv = ch_samplesheet.filter{ meta, bam_or_fp, bai ->
+        ! meta.is_bam
+    }.map{ meta, bam_or_fp, bai ->
+        [ meta, bam_or_fp ]
+    }
+
+    FINGERPRINT_GBCMS(
+        ch_bam,
+        ch_bai,
+        ch_fp_tsv,
+        Channel.of([[:],file(workflow.projectDir + "/assets/combined.dbsnp.assayFP.18557.grch37.vcf")]),
+        Channel.of(file(workflow.projectDir + "/assets/liftover_mapping.tsv")),
+        Channel.of(params.fasta),
+        Channel.of(file(params.fasta.toString() + ".fai")),
+        params.genome,
+        true
     )
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.collect{it[1]})
-    ch_versions = ch_versions.mix(FASTQC.out.versions.first())
 
     //
     // Collate and save software versions

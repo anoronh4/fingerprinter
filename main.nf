@@ -13,7 +13,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { FINGERPRINTER  } from './workflows/fingerprinter'
+
 include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_fingerprinter_pipeline'
 include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_fingerprinter_pipeline'
 include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_fingerprinter_pipeline'
@@ -28,6 +28,8 @@ include { getGenomeAttribute      } from './subworkflows/local/utils_nfcore_fing
 //   This is an example of how to use getGenomeAttribute() to fetch parameters
 //   from igenomes.config using `--genome`
 params.fasta = getGenomeAttribute('fasta')
+
+include { FINGERPRINTER  } from './workflows/fingerprinter'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

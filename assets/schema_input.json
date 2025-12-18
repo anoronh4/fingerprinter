@@ -13,21 +13,24 @@
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
                 "meta": ["id"]
             },
-            "fastq_1": {
+            "pool": {
                 "type": "string",
-                "format": "file-path",
-                "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "^\\S+$",
+                "meta": ["pool"]
             },
-            "fastq_2": {
+            "bam_or_fp": {
                 "type": "string",
                 "format": "file-path",
-                "exists": true,
-                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.(bam|fp.tsv)$"
+            },
+            "fp_genome": {
+                "type": "string",
+                "enum": ["GRCh37", "GRCh38", "GRCh37chr", ""],
+                "errorMessage": "genome must be GRCh37, GRCh38, GRCh37chr, or blank (no spaces)",
+                "meta": ["genome"],
+                "default": ""
             }
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["sample", "bam_or_fp", "pool"]
     }
 }

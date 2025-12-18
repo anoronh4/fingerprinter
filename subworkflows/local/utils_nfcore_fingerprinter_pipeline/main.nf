@@ -86,6 +86,29 @@ workflow PIPELINE_INITIALISATION {
 
     channel
         .fromList(samplesheetToList(params.input, "${projectDir}/assets/schema_input.json"))
+        .map { meta, bam_or_fp ->  
+            def bai = ""
+            def is_bam = false
+            if (bam_or_fp.toString().endsWith(".bam")){
+                is_bam = true
+                bai = file(bam_or_fp + ".bai",checkIfExists:false)
+                if ( ! file(bai).exists()){
+                    bai = file(bam_or_fp[0..-4] + "bai",checkIfExists:true)
+                }
+            }
+            if (! is_bam && meta.genome == "" ) {
+                warning("FP inputs cannot have an empty string in the genome column in the input samplesheet. Defaulting to params.genome")
+                meta.genome = params.genome
+            }
+            if ( is_bam && meta.genome == "" ) {
+                meta.genome = params.genome
+            }
+            if ( is_bam && meta.genome != params.genome ) {
+                error("")
+            }
+            [meta + [ sample:meta.id, is_bam:is_bam ], bam_or_fp, bai]
+        }
+        /*
         .map {
             meta, fastq_1, fastq_2 ->
                 if (!fastq_2) {
@@ -102,6 +125,7 @@ workflow PIPELINE_INITIALISATION {
             meta, fastqs ->
                 return [ meta, fastqs.flatten() ]
         }
+        */
         .set { ch_samplesheet }
 
     emit:

@@ -2,6 +2,51 @@
     "name": "anoronh4/fingerprinter",
     "homePage": "https://github.com/anoronh4/fingerprinter",
     "repos": {
+        "git@github.com:mskcc-omics-workflows/modules.git": {
+            "modules": {
+                "msk": {
+                    "custom/fingerprintcombine": {
+                        "branch": "module/fingerprintparser",
+                        "git_sha": "3cc109ef3f4840d5a571b767cd2ee0623808179a",
+                        "installed_by": ["fingerprint_gbcms_batch"]
+                    },
+                    "custom/fingerprintcontamination": {
+                        "branch": "module/fingerprintparser",
+                        "git_sha": "3cc109ef3f4840d5a571b767cd2ee0623808179a",
+                        "installed_by": ["fingerprint_gbcms"]
+                    },
+                    "custom/fingerprintcorrelation": {
+                        "branch": "module/fingerprintparser",
+                        "git_sha": "3cc109ef3f4840d5a571b767cd2ee0623808179a",
+                        "installed_by": ["fingerprint_gbcms_batch"]
+                    },
+                    "custom/fingerprintvcfparser": {
+                        "branch": "module/fingerprintparser",
+                        "git_sha": "3cc109ef3f4840d5a571b767cd2ee0623808179a",
+                        "installed_by": ["fingerprint_gbcms"]
+                    },
+                    "gbcms": {
+                        "branch": "module/fingerprintparser",
+                        "git_sha": "3cc109ef3f4840d5a571b767cd2ee0623808179a",
+                        "installed_by": ["fingerprint_gbcms"]
+                    }
+                }
+            },
+            "subworkflows": {
+                "msk": {
+                    "fingerprint_gbcms": {
+                        "branch": "module/fingerprintparser",
+                        "git_sha": "3cc109ef3f4840d5a571b767cd2ee0623808179a",
+                        "installed_by": ["subworkflows"]
+                    },
+                    "fingerprint_gbcms_batch": {
+                        "branch": "module/fingerprintparser",
+                        "git_sha": "3cc109ef3f4840d5a571b767cd2ee0623808179a",
+                        "installed_by": ["fingerprint_gbcms"]
+                    }
+                }
+            }
+        },
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {

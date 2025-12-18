@@ -1,0 +1,45 @@
+{
+    "sarscov2 illumina  paired-end [fastq]": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "197"
+                        },
+                        "variant_file.vcf:md5,28c8df33c7ea5ed5d1cf9997d8e00ffa"
+                    ]
+                ],
+                "1": [
+                    [
+                        "GBCMS",
+                        "gbcms",
+                        "1.2.4"
+                    ]
+                ],
+                "variant_file": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "197"
+                        },
+                        "variant_file.vcf:md5,28c8df33c7ea5ed5d1cf9997d8e00ffa"
+                    ]
+                ],
+                "versions_gbcms": [
+                    [
+                        "GBCMS",
+                        "gbcms",
+                        "1.2.4"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-17T12:07:13.813792199"
+    }
+}
