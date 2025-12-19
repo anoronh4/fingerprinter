@@ -7,7 +7,7 @@
                 "msk": {
                     "custom/fingerprintcombine": {
                         "branch": "module/fingerprintparser",
-                        "git_sha": "3cc109ef3f4840d5a571b767cd2ee0623808179a",
+                        "git_sha": "54fff1bcae4ce676a70b20276bb91e70697a354c",
                         "installed_by": ["fingerprint_gbcms_batch"]
                     },
                     "custom/fingerprintcontamination": {
@@ -17,7 +17,7 @@
                     },
                     "custom/fingerprintcorrelation": {
                         "branch": "module/fingerprintparser",
-                        "git_sha": "3cc109ef3f4840d5a571b767cd2ee0623808179a",
+                        "git_sha": "8a596c9921a7aa4f94e99e10671e57050501a296",
                         "installed_by": ["fingerprint_gbcms_batch"]
                     },
                     "custom/fingerprintvcfparser": {
