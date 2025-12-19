@@ -97,14 +97,14 @@ workflow PIPELINE_INITIALISATION {
                 }
             }
             if (! is_bam && meta.genome == "" ) {
-                warning("FP inputs cannot have an empty string in the genome column in the input samplesheet. Defaulting to params.genome")
+                println "FP inputs cannot have an empty string in the genome column in the input samplesheet. Defaulting to params.genome"
                 meta.genome = params.genome
             }
             if ( is_bam && meta.genome == "" ) {
                 meta.genome = params.genome
             }
             if ( is_bam && meta.genome != params.genome ) {
-                error("")
+                error("All Bams must either have empty genome \"\" or params.genome: $params.genome")
             }
             [meta + [ sample:meta.id, is_bam:is_bam ], bam_or_fp, bai]
         }
