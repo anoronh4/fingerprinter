@@ -14,9 +14,16 @@
                 "meta": ["id"]
             },
             "pool": {
-                "type": "string",
+                "type": ["string","integer"],
                 "pattern": "^\\S+$",
                 "meta": ["pool"]
+            },
+            "group": {
+                "type": ["string","integer"],
+                "pattern": "^\\S+$",
+                "meta": ["group"],
+                "default": ""
+
             },
             "bam_or_fp": {
                 "type": "string",
