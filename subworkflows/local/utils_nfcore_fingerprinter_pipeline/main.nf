@@ -93,9 +93,10 @@ workflow PIPELINE_INITIALISATION {
                 is_bam = true
                 bai = file(bam_or_fp + ".bai",checkIfExists:false)
                 if ( ! file(bai).exists()){
-                    bai = file(bam_or_fp[0..-4] + "bai",checkIfExists:true)
+                    bai = file(bam_or_fp.toString()[0..-4] + "bai",checkIfExists:true)
                 }
             }
+            /*
             if (! is_bam && meta.genome == "" ) {
                 println "FP inputs cannot have an empty string in the genome column in the input samplesheet. Defaulting to params.genome"
                 meta.genome = params.genome
@@ -106,6 +107,7 @@ workflow PIPELINE_INITIALISATION {
             if ( is_bam && meta.genome != params.genome ) {
                 error("All Bams must either have empty genome \"\" or params.genome: $params.genome")
             }
+            */
             [meta + [ sample:meta.id, is_bam:is_bam ], bam_or_fp, bai]
         }
         /*

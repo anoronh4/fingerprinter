@@ -3,12 +3,24 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { MULTIQC                } from '../modules/nf-core/multiqc/main'
-include { paramsSummaryMap       } from 'plugin/nf-schema'
-include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_fingerprinter_pipeline'
-include { FINGERPRINT_GBCMS      } from '../subworkflows/msk/fingerprint_gbcms/main'
+include { MULTIQC                 } from '../modules/nf-core/multiqc/main'
+include { paramsSummaryMap        } from 'plugin/nf-schema'
+include { paramsSummaryMultiqc    } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML  } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+include { methodsDescriptionText  } from '../subworkflows/local/utils_nfcore_fingerprinter_pipeline'
+include {
+        FINGERPRINT_GBCMS as FINGERPRINT_GBCMS_GRCH38 ;
+        FINGERPRINT_GBCMS as FINGERPRINT_GBCMS_GRCH37 ;
+        FINGERPRINT_GBCMS as FINGERPRINT_GBCMS_GRCH37_CHR
+    } from '../subworkflows/msk/fingerprint_gbcms/main'
+include { FINGERPRINT_GBCMS_BATCH } from '../subworkflows/msk/fingerprint_gbcms_batch/main'
+include { FASTAREMOVECHRPREFIX    } from '../modules/local/fastaremovechrprefix/main'
+include { FASTAADDCHRPREFIX       } from '../modules/local/fastaaddchrprefix/main'
+include {
+    SAMTOOLS_FAIDX as SAMTOOLS_FAIDX_GRCH38 ;
+    SAMTOOLS_FAIDX as SAMTOOLS_FAIDX_GRCH37_CHR
+} from '../modules/nf-core/samtools/faidx/main'
+
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -24,6 +36,13 @@ workflow FINGERPRINTER {
 
     ch_versions = channel.empty()
     ch_multiqc_files = channel.empty()
+
+
+    FASTAREMOVECHRPREFIX(Channel.of([[:],params.fasta_grch38]))
+    SAMTOOLS_FAIDX_GRCH38(FASTAREMOVECHRPREFIX.out.fasta,[[:],[]],true)
+
+    FASTAADDCHRPREFIX(Channel.of([[:],params.fasta_grch37]))
+    SAMTOOLS_FAIDX_GRCH37_CHR(FASTAADDCHRPREFIX.out.fasta,[[:],[]],true)
 
     ch_is_bam = ch_samplesheet.filter{ meta, bam_or_fp, bai ->
         meta.is_bam
@@ -41,16 +60,55 @@ workflow FINGERPRINTER {
         [ meta, bam_or_fp ]
     }
 
-    FINGERPRINT_GBCMS(
-        ch_bam,
-        ch_bai,
-        ch_fp_tsv,
+    FINGERPRINT_GBCMS_GRCH38(
+        ch_bam.filter{ meta, bam -> meta.genome == "GRCh38" },
+        ch_bai.filter{ meta, bai -> meta.genome == "GRCh38" },
+        ch_fp_tsv.filter{ meta, fp_tsv -> meta.genome == "GRCh38" },
+        Channel.of([[:],file(workflow.projectDir + "/assets/combined.dbsnp.assayFP.18517.grch38.vcf")]),
+        [],
+        FASTAREMOVECHRPREFIX.out.fasta.map{it[1]},
+        SAMTOOLS_FAIDX_GRCH38.out.fai.map{it[1]},
+        "GRCh38",
+        false
+    )
+
+    FINGERPRINT_GBCMS_GRCH37(
+        ch_bam.filter{ meta, bam -> meta.genome == "GRCh37" },
+        ch_bai.filter{ meta, bai -> meta.genome == "GRCh37" },
+        ch_fp_tsv.filter{ meta, fp_tsv -> meta.genome == "GRCh37" },
         Channel.of([[:],file(workflow.projectDir + "/assets/combined.dbsnp.assayFP.18557.grch37.vcf")]),
+        [],
+        Channel.of(params.fasta_grch37),
+        Channel.of(params.fasta_grch37_fai),
+        "GRCh37",
+        false
+    )
+
+    FINGERPRINT_GBCMS_GRCH37_CHR(
+        ch_bam.filter{ meta, bam -> meta.genome == "GRCh37chr" },
+        ch_bai.filter{ meta, bai -> meta.genome == "GRCh37chr" },
+        ch_fp_tsv.filter{ meta, fp_tsv -> meta.genome == "GRCh37chr" },
+        Channel.of([[:],file(workflow.projectDir + "/assets/combined.dbsnp.assayFP.18557.grch37.chr.vcf")]),
+        [],
+        FASTAADDCHRPREFIX.out.fasta.map{it[1]},
+        SAMTOOLS_FAIDX_GRCH37_CHR.out.fai.map{it[1]},
+        "GRCh37chr",
+        false
+    )
+
+    FINGERPRINT_GBCMS_BATCH(
+        FINGERPRINT_GBCMS_GRCH38.out.fp_tsv
+            .mix(FINGERPRINT_GBCMS_GRCH37.out.fp_tsv)
+            .mix(FINGERPRINT_GBCMS_GRCH37_CHR.out.fp_tsv)
+            .map{ meta, fp ->
+                def meta2 = meta.clone()
+                meta2.genome = meta.genome.replace("chr","")
+                [meta2, fp]
+            },
         Channel.of(file(workflow.projectDir + "/assets/liftover_mapping.tsv")),
-        Channel.of(params.fasta),
-        Channel.of(file(params.fasta.toString() + ".fai")),
-        params.genome,
-        true
+        "GRCh37"
+
+
     )
 
     //
