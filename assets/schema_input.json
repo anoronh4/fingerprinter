@@ -32,7 +32,7 @@
             },
             "fp_genome": {
                 "type": "string",
-                "enum": ["GRCh37", "GRCh38", "GRCh37chr", ""],
+                "enum": ["GRCh37", "GRCh38", "GRCh37chr"],
                 "errorMessage": "genome must be GRCh37, GRCh38, GRCh37chr, or blank (no spaces)",
                 "meta": ["genome"],
                 "default": ""
