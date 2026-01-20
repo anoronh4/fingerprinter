@@ -18,14 +18,14 @@ workflow FINGERPRINT_GBCMS {
 
     main:
 
-    println ch_fp_loci_vcf.getClass()
-    println ch_fasta.getClass()
+    //println ch_fp_loci_vcf.getClass()
+    //println ch_fasta.getClass()
 
     GBCMS(
         ch_bam
             .combine(ch_bai, by:[0])
             .combine(ch_fp_loci_vcf.map{ if ( [it].flatten().size() > 1){ it[1] } else { it }}.first())
-            .map{ meta, bam, bai, vcf -> [ meta, bam, bai, vcf, meta.id + ".fp.vcf" ] }.view(),
+            .map{ meta, bam, bai, vcf -> [ meta, bam, bai, vcf, meta.id + ".fp.vcf" ] },//.view(),
         ch_fasta.first(),
         ch_fastafai.first()
         //ch_fasta.view().map{ if (it[0] instanceof Map){ it[1] } else { it }}.first(),
@@ -51,7 +51,7 @@ workflow FINGERPRINT_GBCMS {
         .filter{ meta, tsv -> meta.id != meta.case_id || meta.control_id == null }
         .map{ meta, tsv -> [ meta, tsv, [] ] }
 
-    CUSTOM_FINGERPRINTCONTAMINATION ( paired_fps.mix(unpaired_fps).view() )
+    CUSTOM_FINGERPRINTCONTAMINATION ( paired_fps.mix(unpaired_fps) )
 
     if (run_correlation) {
         FINGERPRINT_GBCMS_BATCH (
@@ -59,13 +59,17 @@ workflow FINGERPRINT_GBCMS {
             ch_liftover_loci_mapping,
             default_genome
         )
+        combined_fp_tsv   = FINGERPRINT_GBCMS_BATCH.out.combined_fp_tsv
     } else {
-        FINGERPRINT_GBCMS_BATCH.out.combined_fp_tsv = Channel.empty()
+        combined_fp_tsv = Channel.empty()
+        //FINGERPRINT_GBCMS_BATCH.out.combined_fp_tsv = Channel.empty()
     }
+
 
     emit:
     fp_tsv            = CUSTOM_FINGERPRINTVCFPARSER.out.tsv                   // channel: [ val(meta), tsv ]
     contamination_tsv = CUSTOM_FINGERPRINTCONTAMINATION.out.contamination_tsv // channel: [ val(meta), contamination_tsv ]
-    combined_fp_tsv   = FINGERPRINT_GBCMS_BATCH.out.combined_fp_tsv           // channel: [ tsv ]
+    combined_fp_tsv   = combined_fp_tsv
+    //combined_fp_tsv   = FINGERPRINT_GBCMS_BATCH.out.combined_fp_tsv           // channel: [ tsv ]
 
 }
