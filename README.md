@@ -14,13 +14,8 @@
 
 ## Introduction
 
-**anoronh4/fingerprinter** is a bioinformatics pipeline that ...
+**anoronh4/fingerprinter** is a bioinformatics pipeline that takes aligned bams and/or pre-computed fingerprints and outputs fingerprints, contamination levels for each sample, and computes correlations between samples in the run. 
 
-<!-- TODO nf-core:
-   Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
-   major pipeline sections and the types of output it produces. You're giving an overview to someone new
-   to nf-core here, in 15-20 seconds. For an example, see https://github.com/nf-core/rnaseq/blob/master/README.md#introduction
--->
 
 <!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
      workflows use the "tube map" design for that. See https://nf-co.re/docs/guidelines/graphic_design/workflow_diagrams#examples for examples.   -->
@@ -31,29 +26,24 @@
 > [!NOTE]
 > If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline) with `-profile test` before running the workflow on actual data.
 
-<!-- TODO nf-core: Describe the minimum required steps to execute the pipeline, e.g. how to prepare samplesheets.
-     Explain what rows and columns represent. For instance (please edit as appropriate):
-
 First, prepare a samplesheet with your input data that looks as follows:
 
 `samplesheet.csv`:
 
 ```csv
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
+sample,pool,bam_or_fp,fp_genome,group
+sample_XYZ_A,IMPACT_20240101,/path/to/sample_XYZ_A.bam,GRCh37,XYZ
+sample_XYZ_B,RNA_2024_0201,/path/to/sample_XYZ_B.bam,GRCh38,XYZ
+sample_WXY_C,RNA_2024_0203,/path/to/sample_WXY_C.fp.tsv,GRCh37,WXY
 ```
 
-Each row represents a fastq file (single-end) or a pair of fastq files (paired end).
-
--->
+Each row represents a bam or fingerprint input.
 
 Now, you can run the pipeline using:
 
-<!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
-
 ```bash
 nextflow run anoronh4/fingerprinter \
-   -profile <docker/singularity/.../institute> \
+   -profile singularity,iris \
    --input samplesheet.csv \
    --outdir <OUTDIR>
 ```
