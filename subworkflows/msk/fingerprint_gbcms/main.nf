@@ -59,15 +59,14 @@ workflow FINGERPRINT_GBCMS {
             ch_liftover_loci_mapping,
             default_genome
         )
-        combined_fp_tsv   = FINGERPRINT_GBCMS_BATCH.out.combined_fp_tsv
     } else {
-        combined_fp_tsv   = Channel.empty()
+        FINGERPRINT_GBCMS_BATCH.out.combined_fp_tsv = Channel.empty()
     }
 
     emit:
     fp_tsv_from_bam   = CUSTOM_FINGERPRINTVCFPARSER.out.tsv                   // channel: [ val(meta), tsv ]
     fp_tsv            = all_fps                                               // channel: [ val(meta), tsv ]
     contamination_tsv = CUSTOM_FINGERPRINTCONTAMINATION.out.contamination_tsv // channel: [ val(meta), contamination_tsv ]
-    combined_fp_tsv   = combined_fp_tsv           // channel: [ tsv ]
+    combined_fp_tsv   = FINGERPRINT_GBCMS_BATCH.out.combined_fp_tsv           // channel: [ tsv ]
 
 }
