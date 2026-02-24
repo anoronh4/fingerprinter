@@ -1,0 +1,3 @@
+pool,bam_or_fp,genome,sample,patient
+Pool1,"../../../tests/test_data/rnaseq2.grch38.22.bam",GRCh38,rnaseq2,rnaseq2
+Pool1,"../../../tests/test_data/rnaseq.grch38.22.bam",GRCh38,rnaseq,rnaseq

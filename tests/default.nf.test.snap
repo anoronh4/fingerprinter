@@ -1,0 +1,94 @@
+{
+    "-profile test": {
+        "content": [
+            {
+                "CUSTOM_FINGERPRINTCOMBINE": {
+                    "complete_FP_table.R": "0.1.0"
+                },
+                "CUSTOM_FINGERPRINTCONTAMINATION": {
+                    "calculate_contamination.py": null
+                },
+                "CUSTOM_FINGERPRINTCORRELATION": {
+                    "plot_gbcm.R": "0.1.0"
+                },
+                "CUSTOM_FINGERPRINTVCFPARSER": {
+                    "parse_fingerprint_vcf.py": "0.1.0"
+                },
+                "GBCMS": {
+                    "gbcms": "1.2.4"
+                },
+                "SAMTOOLS_FAIDX_GRCH37_CHR": {
+                    "samtools": "1.22.1"
+                },
+                "SAMTOOLS_FAIDX_GRCH38": {
+                    "samtools": "1.22.1"
+                },
+                "Workflow": {
+                    "anoronh4/fingerprinter": "v1.0.0dev"
+                }
+            },
+            [
+                "custom_fingerprintcombine",
+                "custom_fingerprintcombine/0DPfilter_ALL_FP.txt",
+                "custom_fingerprintcontamination",
+                "custom_fingerprintcontamination/rnaseq.contamination.tsv",
+                "custom_fingerprintcontamination/rnaseq2.contamination.tsv",
+                "custom_fingerprintcorrelation",
+                "custom_fingerprintcorrelation/fp_plots_correlations.tab",
+                "custom_fingerprintcorrelation/fp_plots_extended.html",
+                "custom_fingerprintcorrelation/fp_plots_extended.pdf",
+                "custom_fingerprintcorrelation/fp_plots_observations.tab",
+                "custom_fingerprintvcfparser",
+                "custom_fingerprintvcfparser/rnaseq.fp.tsv",
+                "custom_fingerprintvcfparser/rnaseq2.fp.tsv",
+                "fastaaddchrprefix",
+                "fastaaddchrprefix/human_g1k_v37_decoy.fasta",
+                "fastaremovechrprefix",
+                "fastaremovechrprefix/genome.fa",
+                "gbcms",
+                "gbcms/rnaseq.fp.vcf",
+                "gbcms/rnaseq2.fp.vcf",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/llms-full.txt",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc.parquet",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/fingerprinter_software_mqc_versions.yml",
+                "samtools_faidx_grch37_chr",
+                "samtools_faidx_grch37_chr/human_g1k_v37_decoy.fasta.fai",
+                "samtools_faidx_grch37_chr/human_g1k_v37_decoy.fasta.sizes",
+                "samtools_faidx_grch38",
+                "samtools_faidx_grch38/genome.fa.fai",
+                "samtools_faidx_grch38/genome.fa.sizes"
+            ],
+            [
+                "0DPfilter_ALL_FP.txt:md5,6180c48e3c5b32133d4ddfb9414244cc",
+                "rnaseq.contamination.tsv:md5,21586b305c10f48ab9e642ad47b515a4",
+                "rnaseq2.contamination.tsv:md5,db8c8881dddfefc72153248472e6cd0e",
+                "fp_plots_correlations.tab:md5,474a19c6dd754bd978b06449b6ffe9f4",
+                "fp_plots_observations.tab:md5,e2223e727db34fe54e281a7871549ee0",
+                "rnaseq.fp.tsv:md5,e8c3fd767069701cddf7be8717b4477b",
+                "rnaseq2.fp.tsv:md5,aff18d3bd235632936070592d3074d6f",
+                "rnaseq.fp.vcf:md5,3c0311be2c080077a197bfab489e8e91",
+                "rnaseq2.fp.vcf:md5,21748f1f40f8dd4d4be65aa60052a6b2",
+                "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
+                "multiqc_software_versions.txt:md5,cb5c1464355d2eea1b8894b4bf24304e",
+                "multiqc_sources.txt:md5,d2a044df39ce3c6abe5cdc2d67473490",
+                "fingerprinter_software_mqc_versions.yml:md5,eb5b2e817352b6e944a71dd27407b1d7",
+                "human_g1k_v37_decoy.fasta.sizes:md5,b396e562377204d9e70e007a303b2d35",
+                "genome.fa.sizes:md5,a00f8ec7313e24673824c937585f0cbc"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "26.01.1"
+        },
+        "timestamp": "2026-02-23T20:42:41.05724791"
+    }
+}
