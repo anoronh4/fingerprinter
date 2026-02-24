@@ -37,7 +37,6 @@ workflow FINGERPRINTER {
     ch_versions = channel.empty()
     ch_multiqc_files = channel.empty()
 
-
     FASTAREMOVECHRPREFIX(Channel.of([[:],params.fasta_grch38]))
     SAMTOOLS_FAIDX_GRCH38(FASTAREMOVECHRPREFIX.out.fasta,[[:],[]],true)
 
@@ -106,7 +105,8 @@ workflow FINGERPRINTER {
                 [meta2, fp]
             },
         Channel.of(file(workflow.projectDir + "/assets/liftover_mapping.tsv")),
-        "GRCh37"
+        "GRCh37",
+        params.pool ? channel.of(params.pool,"") : []
 
 
     )
