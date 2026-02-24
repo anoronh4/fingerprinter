@@ -31,7 +31,7 @@ First, prepare a samplesheet with your input data that looks as follows:
 `samplesheet.csv`:
 
 ```csv
-sample,pool,bam_or_fp,fp_genome,group
+sample,pool,bam_or_fp,genome,patient
 sample_XYZ_A,IMPACT_20240101,/path/to/sample_XYZ_A.bam,GRCh37,XYZ
 sample_XYZ_B,RNA_2024_0201,/path/to/sample_XYZ_B.bam,GRCh38,XYZ
 sample_WXY_C,RNA_2024_0203,/path/to/sample_WXY_C.fp.tsv,GRCh37,WXY

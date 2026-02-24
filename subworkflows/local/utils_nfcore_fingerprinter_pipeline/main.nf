@@ -108,7 +108,7 @@ workflow PIPELINE_INITIALISATION {
                 error("All Bams must either have empty genome \"\" or params.genome: $params.genome")
             }
             */
-            [meta + [ sample:meta.id, is_bam:is_bam ], bam_or_fp, bai]
+            [meta + [ is_bam:is_bam ], bam_or_fp, bai]
         }
         /*
         .map {
