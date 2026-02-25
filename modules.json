@@ -42,7 +42,7 @@
                     },
                     "fingerprint_gbcms_batch": {
                         "branch": "module/fingerprintparser",
-                        "git_sha": "baff4ae32cebe7c098f0ee95016726cec26d5be8",
+                        "git_sha": "6c7624bfbeb3a7dd4b580ce0cfbea67527b05e19",
                         "installed_by": ["fingerprint_gbcms"]
                     }
                 }
