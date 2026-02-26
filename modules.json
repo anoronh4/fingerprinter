@@ -36,7 +36,7 @@
                 "msk": {
                     "fingerprint_gbcms": {
                         "branch": "module/fingerprintparser",
-                        "git_sha": "baff4ae32cebe7c098f0ee95016726cec26d5be8",
+                        "git_sha": "eeedcad580f3a1c050c817afd8e585fc32d527ea",
                         "installed_by": ["subworkflows"],
                         "patch": "subworkflows/msk/fingerprint_gbcms/fingerprint_gbcms.diff"
                     },
