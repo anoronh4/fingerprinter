@@ -38,9 +38,9 @@
             },
             "normal": {
                 "type": "string",
-                "enum": ["GRCh37", "GRCh38", "GRCh37chr"],
-                "errorMessage": "genome must be GRCh37, GRCh38, GRCh37chr, or blank (no spaces)",
-                "meta": ["case_control"]
+                "pattern": "^\\S*$",
+                "errorMessage": "Normal must not contain spaces. Can be an empty string",
+                "meta": ["control_id"]
             }
         },
         "required": ["sample", "bam_or_fp", "pool", "genome"]

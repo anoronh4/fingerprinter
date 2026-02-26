@@ -33,6 +33,8 @@
                 "custom_fingerprintcontamination",
                 "custom_fingerprintcontamination/rnaseq.contamination.tsv",
                 "custom_fingerprintcontamination/rnaseq2.contamination.tsv",
+                "custom_fingerprintcontamination/wes_n.contamination.tsv",
+                "custom_fingerprintcontamination/wes_t.contamination.tsv",
                 "custom_fingerprintcorrelation",
                 "custom_fingerprintcorrelation/fp_plots_correlations.tab",
                 "custom_fingerprintcorrelation/fp_plots_extended.html",
@@ -41,6 +43,8 @@
                 "custom_fingerprintvcfparser",
                 "custom_fingerprintvcfparser/rnaseq.fp.tsv",
                 "custom_fingerprintvcfparser/rnaseq2.fp.tsv",
+                "custom_fingerprintvcfparser/wes_n.fp.tsv",
+                "custom_fingerprintvcfparser/wes_t.fp.tsv",
                 "fastaaddchrprefix",
                 "fastaaddchrprefix/human_g1k_v37_decoy.fasta",
                 "fastaremovechrprefix",
@@ -48,6 +52,8 @@
                 "gbcms",
                 "gbcms/rnaseq.fp.vcf",
                 "gbcms/rnaseq2.fp.vcf",
+                "gbcms/wes_n.fp.vcf",
+                "gbcms/wes_t.fp.vcf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/llms-full.txt",
@@ -68,15 +74,21 @@
                 "samtools_faidx_grch38/genome.fa.sizes"
             ],
             [
-                "0DPfilter_ALL_FP.txt:md5,6180c48e3c5b32133d4ddfb9414244cc",
+                "0DPfilter_ALL_FP.txt:md5,cc0410690c3185cf31532f6f4a72417e",
                 "rnaseq.contamination.tsv:md5,21586b305c10f48ab9e642ad47b515a4",
                 "rnaseq2.contamination.tsv:md5,db8c8881dddfefc72153248472e6cd0e",
-                "fp_plots_correlations.tab:md5,474a19c6dd754bd978b06449b6ffe9f4",
-                "fp_plots_observations.tab:md5,e2223e727db34fe54e281a7871549ee0",
+                "wes_n.contamination.tsv:md5,9a288dbc44edad0984d09a5912e8eadb",
+                "wes_t.contamination.tsv:md5,aa3bfb767bea35f64d1bf7cfd8dce744",
+                "fp_plots_correlations.tab:md5,7bcfb8670e294176990b40419c1870b5",
+                "fp_plots_observations.tab:md5,04a9c3ddd62a1cd74caca6917762a8c3",
                 "rnaseq.fp.tsv:md5,e8c3fd767069701cddf7be8717b4477b",
                 "rnaseq2.fp.tsv:md5,aff18d3bd235632936070592d3074d6f",
+                "wes_n.fp.tsv:md5,1b7de6e95d2b875382d7005647a1cdbd",
+                "wes_t.fp.tsv:md5,0d7d1b23ddd03f629597de4ca3a494be",
                 "rnaseq.fp.vcf:md5,3c0311be2c080077a197bfab489e8e91",
                 "rnaseq2.fp.vcf:md5,21748f1f40f8dd4d4be65aa60052a6b2",
+                "wes_n.fp.vcf:md5,1d132aec0b75d6cd8addefbbb8808317",
+                "wes_t.fp.vcf:md5,5bdbe368e21062d1455a11032c6edde3",
                 "multiqc_citations.txt:md5,4c806e63a283ec1b7e78cdae3a923d4f",
                 "multiqc_software_versions.txt:md5,cb5c1464355d2eea1b8894b4bf24304e",
                 "multiqc_sources.txt:md5,d2a044df39ce3c6abe5cdc2d67473490",
@@ -89,6 +101,6 @@
             "nf-test": "0.9.3",
             "nextflow": "26.01.1"
         },
-        "timestamp": "2026-02-23T20:42:41.05724791"
+        "timestamp": "2026-02-26T13:41:33.000853373"
     }
 }

@@ -1,3 +1,5 @@
-pool,bam_or_fp,genome,sample,patient
-Pool1,"../../../tests/test_data/rnaseq2.grch38.22.bam",GRCh38,rnaseq2,rnaseq2
-Pool1,"../../../tests/test_data/rnaseq.grch38.22.bam",GRCh38,rnaseq,rnaseq
+pool,bam_or_fp,genome,sample,patient,normal
+Pool1,"../../../tests/test_data/rnaseq2.grch38.22.bam",GRCh38,rnaseq2,rnaseq2,
+Pool1,"../../../tests/test_data/rnaseq.grch38.22.bam",GRCh38,rnaseq,rnaseq,
+Pool2,"../../../tests/test_data/wes_t.bam",GRCh37,wes_t,wes_patient,wes_n
+Pool2,"../../../tests/test_data/wes_n.bam",GRCh37,wes_n,wes_patient,
