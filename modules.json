@@ -17,7 +17,7 @@
                     },
                     "custom/fingerprintcorrelation": {
                         "branch": "module/fingerprintparser",
-                        "git_sha": "baff4ae32cebe7c098f0ee95016726cec26d5be8",
+                        "git_sha": "f8d47f16ac51ba40fe95acc81c145f35ca9f8edb",
                         "installed_by": ["fingerprint_gbcms_batch"]
                     },
                     "custom/fingerprintvcfparser": {
@@ -36,13 +36,13 @@
                 "msk": {
                     "fingerprint_gbcms": {
                         "branch": "module/fingerprintparser",
-                        "git_sha": "eeedcad580f3a1c050c817afd8e585fc32d527ea",
+                        "git_sha": "5e7d9f1c40a7e2a490245bf9af46163adb369c76",
                         "installed_by": ["subworkflows"],
                         "patch": "subworkflows/msk/fingerprint_gbcms/fingerprint_gbcms.diff"
                     },
                     "fingerprint_gbcms_batch": {
                         "branch": "module/fingerprintparser",
-                        "git_sha": "6c7624bfbeb3a7dd4b580ce0cfbea67527b05e19",
+                        "git_sha": "5e7d9f1c40a7e2a490245bf9af46163adb369c76",
                         "installed_by": ["fingerprint_gbcms"]
                     }
                 }

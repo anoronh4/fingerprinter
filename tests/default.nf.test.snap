@@ -36,10 +36,10 @@
                 "custom_fingerprintcontamination/wes_n.contamination.tsv",
                 "custom_fingerprintcontamination/wes_t.contamination.tsv",
                 "custom_fingerprintcorrelation",
-                "custom_fingerprintcorrelation/fp_plots_correlations.tab",
-                "custom_fingerprintcorrelation/fp_plots_extended.html",
-                "custom_fingerprintcorrelation/fp_plots_extended.pdf",
-                "custom_fingerprintcorrelation/fp_plots_observations.tab",
+                "custom_fingerprintcorrelation/batch_correlations.tab",
+                "custom_fingerprintcorrelation/batch_extended.html",
+                "custom_fingerprintcorrelation/batch_extended.pdf",
+                "custom_fingerprintcorrelation/batch_observations.tab",
                 "custom_fingerprintvcfparser",
                 "custom_fingerprintvcfparser/rnaseq.fp.tsv",
                 "custom_fingerprintvcfparser/rnaseq2.fp.tsv",
@@ -79,8 +79,8 @@
                 "rnaseq2.contamination.tsv:md5,db8c8881dddfefc72153248472e6cd0e",
                 "wes_n.contamination.tsv:md5,9a288dbc44edad0984d09a5912e8eadb",
                 "wes_t.contamination.tsv:md5,aa3bfb767bea35f64d1bf7cfd8dce744",
-                "fp_plots_correlations.tab:md5,7bcfb8670e294176990b40419c1870b5",
-                "fp_plots_observations.tab:md5,04a9c3ddd62a1cd74caca6917762a8c3",
+                "batch_correlations.tab:md5,7bcfb8670e294176990b40419c1870b5",
+                "batch_observations.tab:md5,04a9c3ddd62a1cd74caca6917762a8c3",
                 "rnaseq.fp.tsv:md5,e8c3fd767069701cddf7be8717b4477b",
                 "rnaseq2.fp.tsv:md5,aff18d3bd235632936070592d3074d6f",
                 "wes_n.fp.tsv:md5,1b7de6e95d2b875382d7005647a1cdbd",
@@ -101,6 +101,6 @@
             "nf-test": "0.9.3",
             "nextflow": "26.01.1"
         },
-        "timestamp": "2026-02-26T13:41:33.000853373"
+        "timestamp": "2026-02-26T23:48:30.283261544"
     }
 }
