@@ -45,7 +45,8 @@ Now, you can run the pipeline using:
 nextflow run anoronh4/fingerprinter \
    -profile singularity,iris \
    --input samplesheet.csv \
-   --outdir <OUTDIR>
+   --outdir <OUTDIR> \
+   --pool RNA_2024_0203
 ```
 
 > [!WARNING]
